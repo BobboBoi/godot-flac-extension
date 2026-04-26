@@ -28,6 +28,7 @@ int32_t AudioStreamPlaybackFLAC::_mix_resampled(AudioFrame *p_buffer, int p_fram
 		if (start_buffer > 0) {
 			buffer = (buffer + start_buffer * 2);
 		}
+		
 		int mixed = drflac_read_pcm_frames_f32(pFlac, todo, buffer);
 		for(int i = 0; i < mixed; i++){
 
@@ -244,7 +245,15 @@ int AudioStreamFLAC::_get_beat_count() const {
 // 	return bar_beats;
 // }
 
+Ref<AudioStreamFLAC> AudioStreamFLAC::load_from_file(const String &path) {
+	Ref<AudioStreamFLAC> stream;
+    stream.instantiate();
+    stream->set_data(FileAccess::get_file_as_bytes(path));
+    return stream;
+}
+
 void AudioStreamFLAC::_bind_methods() {
+	ClassDB::bind_static_method("AudioStreamFLAC", D_METHOD("load_from_file", "stream_data"), &AudioStreamFLAC::load_from_file);
 
 	ClassDB::bind_method(D_METHOD("set_data", "data"), &AudioStreamFLAC::set_data);
 	ClassDB::bind_method(D_METHOD("get_data"), &AudioStreamFLAC::get_data);

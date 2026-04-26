@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ba10st8th1ati"]
+
+[ext_resource type="Script" uid="uid://cdfu62emp7m2y" path="res://scripts/tester.gd" id="1_0fbet"]
+
+[node name="Control" type="Control" unique_id=41321646]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0fbet")
+
+[node name="Button" type="Button" parent="." unique_id=74262910]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Play File"
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=916130727]
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.flac")
+show_hidden_files = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=692219772]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
