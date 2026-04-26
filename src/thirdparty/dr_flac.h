@@ -7796,6 +7796,10 @@ drflac_uint64 drflac_read_pcm_frames_f32(drflac* pFlac, drflac_uint64 framesToRe
                         drflac_read_pcm_frames_f32__decode_independent_stereo(pFlac, frameCountThisIteration, unusedBitsPerSample, pDecodedSamples0, pDecodedSamples1, pBufferOut);
                     } break;
                 }
+            } else if (channelCount == 1) {
+                // HACK: Might be possible to do outside of the library but I'm not bothering
+                const drflac_int32* pDecodedSamples = pFlac->currentFrame.subframes[0].pDecodedSamples + iFirstPCMFrame;
+                drflac_read_pcm_frames_f32__decode_independent_stereo__scalar(pFlac, frameCountThisIteration, unusedBitsPerSample, pDecodedSamples, pDecodedSamples, pBufferOut);
             } else {
                 /* Generic interleaving. */
                 drflac_uint64 i;

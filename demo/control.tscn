@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cdfu62emp7m2y" path="res://scripts/tester.gd" id="1_0fbet"]
 
-[node name="Control" type="Control" unique_id=41321646]
-layout_mode = 3
+[node name="Control" type="VBoxContainer" unique_id=1190137798]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,10 +11,13 @@ grow_vertical = 2
 script = ExtResource("1_0fbet")
 
 [node name="Button" type="Button" parent="." unique_id=74262910]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 2
+size_flags_horizontal = 0
 text = "Play File"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=999837563]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=916130727]
 title = "Open a File"
@@ -23,6 +25,7 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.flac")
 show_hidden_files = true
+use_native_dialog = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=692219772]
 
